@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block extrahead %}
+<link
+    rel="icon"
+    type="image/svg+xml"
+    href="{{ 'assets/petri-favicon.svg' | url }}"
+/>
+{% endblock %} {% block site_name %}
+<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="navbar-brand" href="{{ nav.homepage.url | url }}">
+    <img
+        src="{{ 'assets/petri-mark-compact.svg' | url }}"
+        width="34"
+        height="34"
+        alt=""
+    />
+    {{ config.site_name }}
+</a>
+{% endblock %}
+{% block site_nav %}
+<ul class="nav navbar-nav petri-top-nav" aria-label="Documentation sections">
+    {% for item in nav %}
+    {% set destination = item.children[0] if item.children else item %}
+    <li class="nav-item">
+        <a href="{{ destination.url | url }}" class="nav-link{% if item.active %} active{% endif %}"{% if item.active %} aria-current="{{ 'page' if destination.active else 'true' }}"{% endif %}>{{ item.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %} {% block next_prev %}{% endblock %} {% block search_button %} {%
+if 'search' in config.plugins %}
+<li class="nav-item">
+    <button
+        type="button"
+        class="nav-link"
+        data-bs-toggle="modal"
+        data-bs-target="#mkdocs_search_modal"
+        aria-label="Search documentation"
+        aria-keyshortcuts="Meta+K Control+K"
+        title="Search (Cmd+K on macOS, Ctrl+K on Windows/Linux)"
+    >
+        <i class="fa fa-search" aria-hidden="true"></i> Search
+        <kbd class="lab-search-shortcut" aria-hidden="true">Ctrl K</kbd>
+    </button>
+</li>
+{% endif %} {% endblock %} {% block content %} {% if page and page.is_homepage
+%}
+<main id="main-content" class="col-12 lab-home" tabindex="-1">
+    {{ page.content }}
+</main>
+{% else %}
+{% set section = nav | selectattr('active') | selectattr('children') | first %}
+{% set is_wide = page and page.meta.wide %}
+<div class="petri-doc-layout{% if is_wide %} petri-doc-wide{% endif %}">
+{% if section %}{% include "section-nav.html" %}{% endif %}
+<main id="main-content" class="{{ 'lab-wide' if is_wide else 'lab-notes' }}" tabindex="-1">
+    {% include "content.html" %}
+</main>
+{% if not is_wide %}
+<aside class="petri-page-toc" aria-label="On this page">{% include "toc.html" %}</aside>
+{% endif %}
+</div>
+{% endif %} {% endblock %} {% block footer %}
+<div class="container lab-footer">
+    <!--<span>Small environments. Room to experiment.</span>-->
+    <span>
+        Made by <a href="https://github.com/petri-dev">the petri-dev authors</a>
+    </span>
+    <span>
+        <a href="{{ config.repo_url }}">Contribute to the documentation</a> /
+        Built with <a href="https://www.mkdocs.org/">MkDocs</a>
+    </span>
+</div>
+ {% endblock %}

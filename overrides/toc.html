@@ -1,0 +1,23 @@
+{% macro toc_item(item) %}
+{% if item.level <= config.theme.navigation_depth %}
+<li class="nav-item" data-bs-level="{{ item.level }}">
+    <a href="{{ item.url }}" class="nav-link">{{ item.title }}</a>
+    {% if item.children %}
+    <ul class="nav flex-column">
+        {% for child in item.children %}{{ toc_item(child) }}{% endfor %}
+    </ul>
+    {% endif %}
+</li>
+{% endif %}
+{% endmacro %}
+<div class="navbar-expand-xl bs-sidebar hidden-print affix">
+    <p class="petri-toc-title d-none d-xl-block">On this page</p>
+    <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" aria-controls="toc-collapse" aria-expanded="false">
+        <span class="fa fa-angle-down" aria-hidden="true"></span> On this page
+    </button>
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            {% for item in page.toc %}{{ toc_item(item) }}{% endfor %}
+        </ul>
+    </div>
+</div>

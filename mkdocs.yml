@@ -1,0 +1,57 @@
+site_name: Petri
+site_description: Ephemeral environments on Kubernetes.
+site_url: https://docs.petri.run/
+repo_url: https://github.com/petri-dev/docs
+edit_uri: edit/main/docs/
+
+watch:
+  - overrides
+
+theme:
+  name: mkdocs
+  custom_dir: overrides
+  nav_style: light
+  color_mode: auto
+  user_color_mode_toggle: true
+
+extra_css:
+  - stylesheets/petri.css
+
+extra_javascript:
+  - javascripts/toc.js
+  - javascripts/code.js
+  - javascripts/search.js
+  - javascripts/diagram.js
+
+markdown_extensions:
+  - md_in_html
+  - attr_list
+
+nav:
+  - Home: index.md
+  - Get started:
+      - Overview and prerequisites: learn.md
+      - Quickstarts:
+          - Your first environment: quickstart.md
+          - Run the API server locally: local-quickstart.md
+  - Concepts:
+      - Architecture: architecture.md
+      - Templates and environments: concepts/templates-and-environments.md
+      - Deployment lifecycle and readiness: concepts/lifecycle.md
+      - Namespaces, ownership, and isolation: concepts/namespaces.md
+      - Shared components and providers: concepts/shared-components.md
+  - Operations:
+      - Monitor Petri: operations/monitoring.md
+  - Reference:
+      - Kubernetes resources: operator/index.md
+      - HTTP API: apiserver/index.md
+  - Contributing:
+      - Implementation internals: contributing/internals.md
+
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn
