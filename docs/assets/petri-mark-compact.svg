@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <title>Petri Colony</title>
+  <style>
+    :root { --primary: #105c50; --secondary: #79c9a3; --accent: #e4b51d; }
+    @media (prefers-color-scheme: dark) {
+      :root { --primary: #93d4b3; --secondary: #c0ebd6; --accent: #f1cc53; }
+    }
+  </style>
+  <path fill="var(--primary)" fill-rule="evenodd" d="M8 64a56 56 0 1 0 112 0a56 56 0 1 0 -112 0ZM12 64a52 52 0 1 0 104 0a52 52 0 1 0 -104 0Z"/>
+  <path fill="var(--primary)" d="M52.603376 72.602350A24.739708 24.739708 0 1 1 74.243647 52.929376A28.654765 28.654765 0 0 0 52.603376 72.602350Z"/>
+  <path fill="var(--secondary)" d="M57.345235 81a22.654765 22.654765 0 1 0 45.309530 0a22.654765 22.654765 0 1 0 -45.309530 0Z"/>
+  <circle cx="88" cy="41" r="7.5" fill="var(--accent)"/>
+  <circle cx="40" cy="88" r="6.5" fill="var(--secondary)"/>
+</svg>
